@@ -4,7 +4,7 @@
 BASE_GPIO_PATH=/sys/class/gpio
 
 # Assign names to GPIO pin numbers for each light
-GREEN=11
+GREEN=26
 
 # Assign names to states
 ON="1"
@@ -63,7 +63,8 @@ while [ 1 ]
 do
   #exit 0
   state=$(getValue $GREEN | awk '{print $5}')
-  if [[ $state == "lo" ]]; then
+  if [[ "$state" == "lo" ]]; then
     echo MUSIC
   fi
+  sleep 1
 done
