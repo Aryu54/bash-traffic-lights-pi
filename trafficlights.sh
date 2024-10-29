@@ -62,7 +62,7 @@ setOutput $GREEN
 while [ 1 ]
 do
   files=$(ls *.mp3)
-  echo files
+  echo $files
   for i in "${!files[@]}"; do
     j=$(( RANDOM % "${#files[@]}" ))
     [ "$i" -ne "$j" ] && {
@@ -71,7 +71,7 @@ do
       files[j]="$tmp"
     }
   done
-  echo files
+  echo $files
   state=$(getValue $GREEN | awk '{print $5}')
   if [[ "$state" == "lo" ]]; then
     echo MUSIC
