@@ -21,7 +21,8 @@ exportPin()
 # Utility function to set a pin as an output
 setOutput()
 {
-  echo "out" > $BASE_GPIO_PATH/gpio$1/direction
+ # echo "out" > $BASE_GPIO_PATH/gpio$1/direction
+ pinctrl set $1 ip pu
 }
 
 setInput()
@@ -36,7 +37,8 @@ setLightState()
 
 getValue()
 {
-  cat $BASE_GPIO_PATH/gpio$1/value
+  #cat $BASE_GPIO_PATH/gpio$1/value
+  pinctrl get $1
 }
 # Utility function to turn all lights off
 allLightsOff()
@@ -53,12 +55,15 @@ shutdown()
 }
 
 trap shutdown SIGINT
-exportPin $GREEN
+#exportPin $GREEN
 
 setOutput $GREEN
 
 while [ 1 ]
 do
-  exit 0
-  getValue $GREEN
+  #exit 0
+  state=$(getValue $GREEN | awk '{print $5}')
+  if [[ $state == "lo" ]]; then
+    echo MUSIC
+  fi
 done
