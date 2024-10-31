@@ -73,6 +73,6 @@ do
   state=$(getValue $GREEN | awk '{print $5}')
   if [[ "$state" == "lo" ]]; then
     echo $files
+    mplayer $files
   fi
-  sleep 1
 done
